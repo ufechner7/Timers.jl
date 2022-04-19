@@ -4,15 +4,15 @@ authors = ["Uwe Fechner <fechner@aenarete.eu> and contributors"]
 version = "0.1.0"
 
 [deps]
-Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 TestEnv = "1e6cf692-eddd-4d53-88a5-2d735e33781b"
 
 [compat]
-julia = "1"
 TestEnv = "1"
+julia = "1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 
 [targets]
-test = ["Test"]
+test = ["Test", "BenchmarkTools"]

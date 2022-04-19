@@ -22,22 +22,41 @@ SOFTWARE. =#
 
 module Timers
 
-using Dates
+export tic, toc, sleep_ms, wait_until
 
-export tic, toc, sleep_ms
-
-const start = [now()]
+const start = [time()]
 
 function tic()
-    start[1] = now()
+    start[1] = time()
 end
 
 function toc()
-    time = now() - start[1]
+    time() - start[1]
 end
 
-function  sleep_ms(time_ms)
-    Base.Libc.systemsleep(time_ms/1000.0)
+@inline function  sleep_ms(time_ms)
+    delta = 0.0002
+    finish = time() + time_ms/1000.0
+    # sleep
+    if time_ms > 1000.0 * delta
+        Base.Libc.systemsleep(time_ms/1000.0 - delta)
+    end
+    # busy waiting
+    while finish > time()-0.95e-6
+    end
+end
+
+# time in seconds since epoch
+@inline function wait_until(finish)
+    delta = 0.0002
+    # sleep 
+    while finish - delta > time()
+        Base.Libc.systemsleep(delta)
+    end
+    # busy waiting
+    while finish > time()-0.95e-6
+    end
+    nothing
 end
 
 end
