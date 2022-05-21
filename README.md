@@ -10,8 +10,7 @@ Starts a timer
 Returns the time since the timer was started in seconds
 
 ```sleep_ms(time_ms)```  
-Sleeps for the given number of milli-seconds. Accuracy on Linux better than 100 nanoseconds,
-on Windows better than 100 microseconds, but only if the system is not fully loaded.
+Sleeps for the given number of milli-seconds. Accuracy on Linux better than 100 nanoseconds +-0.2%, but only if the system is not fully loaded. On Windows accurate timing in the ms range is not possible.
 
 ```wait_until(finish; always_sleep=false)```  
 Sleeps until the given time is reached. Example:
