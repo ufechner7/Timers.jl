@@ -35,11 +35,16 @@ function toc()
 end
 
 @inline function  sleep_ms(time_ms)
-    delta = 0.0002
+    delta1 = 0.002
+    delta2 = 0.0002
     finish = time() + time_ms/1000.0
-    # sleep
-    if time_ms > 1000.0 * delta
-        Base.Libc.systemsleep(time_ms/1000.0 - delta)
+    # sleep and allow cooperative multitasking
+    if finish - delta1 > time()
+        sleep(finish - time() - 0.001)
+    end
+    # sleep using the OS sleep functions
+    if time_ms > 1000.0 * delta2
+        Base.Libc.systemsleep(time_ms/1000.0 - delta2)
     end
     # busy waiting
     while finish > time()-0.95e-6
