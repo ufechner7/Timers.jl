@@ -1,7 +1,7 @@
 name = "Timers"
 uuid = "21f18d07-b854-4dab-86f0-c15a3821819a"
 authors = ["Uwe Fechner <fechner@aenarete.eu> and contributors"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 TestEnv = "1e6cf692-eddd-4d53-88a5-2d735e33781b"
