@@ -28,3 +28,25 @@ The section "```# do some work```" is executed exactly every 50ms as long as exe
 The additional parameter always_sleep can be set to true if you want to ensure that the sleep function
 is always called for at least 1 ms. This is useful if you need to ensure that cooperative multitasking
 works even for the price to miss the deadline.
+
+## Test results
+Comparism of the desired and actual sleep time for the functions sleep() and sleep_ms():
+```julia
+julia> include("test/bench.jl")
+7-element BenchmarkTools.BenchmarkGroup:
+  tags: ["sleep_ms"]
+  "100µs" => TrialEstimate(100.927 μs)
+  "200µs" => TrialEstimate(200.664 μs)
+  "5ms" => TrialEstimate(5.002 ms)
+  "1ms" => TrialEstimate(1.001 ms)
+  "10ms" => TrialEstimate(10.002 ms)
+  "500µs" => TrialEstimate(500.959 μs)
+  "2ms" => TrialEstimate(2.001 ms)
+4-element BenchmarkTools.BenchmarkGroup:
+  tags: ["sleep"]
+  "5ms" => TrialEstimate(6.287 ms)
+  "1ms" => TrialEstimate(2.260 ms)
+  "10ms" => TrialEstimate(11.311 ms)
+  "2ms" => TrialEstimate(3.251 ms)
+```
+This are the mean values. The error of the sleep_ms function is mostly below 0.1%, only for 500µs delay the error is about 0.2%. The error of the default sleep() function of Julia is between 1ms and 2ms, for the set values of 1ms to 10ms this is an error of 13% to 62%.
