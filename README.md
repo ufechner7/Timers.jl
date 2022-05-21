@@ -29,7 +29,9 @@ is always called for at least 1 ms. This is useful if you need to ensure that co
 works even for the price to miss the deadline.
 
 ## Test results
-Comparism of the desired and actual sleep time for the functions sleep() and sleep_ms():
+Comparison of the desired and actual sleep time for the functions sleep() and sleep_ms():
+
+OS: Ubuntu 18.04 with a i7-7700K CPU and the standard kernel version 5.4.0-87-generic.
 ```julia
 julia> include("test/bench.jl")
 7-element BenchmarkTools.BenchmarkGroup:
