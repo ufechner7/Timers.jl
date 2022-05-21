@@ -13,7 +13,7 @@ Returns the time since the timer was started in seconds
 Sleeps for the given number of milli-seconds. Accuracy on Linux better than 100 nanoseconds,
 on Windows better than 100 microseconds, but only if the system is not fully loaded.
 
-```wait_until(finish)```  
+```wait_until(finish; always_sleep=false)```  
 Sleeps until the given time is reached. Example:
 ```julia
 dt = 0.05
@@ -24,3 +24,7 @@ for i in 1:100
 end
 ```
 The section "```# do some work```" is executed exactly every 50ms as long as executing this section takes less than 50ms.
+
+The additional parameter always_sleep can be set to true if you want to ensure that the sleep function
+is always called for at least 1 ms. This is useful if you need to ensure that cooperative multitasking
+works even for the price to miss the deadline.
