@@ -26,9 +26,10 @@ suite["sleep"]["1ms"] = @benchmarkable sleep(1.0e-3)
 suite["sleep"]["2ms"] = @benchmarkable sleep(2.0e-3)
 suite["sleep"]["5ms"] = @benchmarkable sleep(5.0e-3)
 suite["sleep"]["10ms"] = @benchmarkable sleep(10.0e-3)
+suite["sleep"]["20ms"] = @benchmarkable sleep(20.0e-3)
 
 tune!(suite);
 results = run(suite, seconds = 1)
 m1 = mean(results["sleep_ms"])
 m2 = mean(results["sleep"])
-show(m1);println();show(m2);
+show(m1);println();show(m2);println()

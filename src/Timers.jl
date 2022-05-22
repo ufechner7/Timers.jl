@@ -39,7 +39,7 @@ function toc(prn=true)
     elapsed
 end
 
-@inline function  sleep_ms(time_ms)
+@inline function sleep_ms(time_ms)
     # use the sleep() function only for delays greater than 4ms on Linux
     if Sys.islinux()
         delta1 = 0.004e9
@@ -55,24 +55,26 @@ end
     # busy waiting
     while finish > time_ns()
     end
+    nothing
 end
 
-# time in seconds since epoch
-@inline function wait_until(finish; always_sleep=false)
+# time in nano seconds
+@inline function wait_until(finish_ns; always_sleep=false)
     if always_sleep
         sleep(0.001)
     end
-    delta1 = 0.002
-    delta2 = 0.0002
-    if finish - delta1 > time()
-        sleep(finish - time() - 0.001)
+    if Sys.islinux()
+        delta1 = 0.004e9
+    else
+        # and delays greater than 16ms on other OS
+        delta1 = 16e9
     end
-    # sleep 
-    while finish - delta2 > time()
-        Base.Libc.systemsleep(delta2)
+    # sleep and allow cooperative multitasking
+    if finish_ns - delta1 > time_ns()
+        sleep(1e-9*(finish_ns - time_ns() - delta1))
     end
     # busy waiting
-    while finish > time()-0.95e-6
+    while finish_ns > time_ns()
     end
     nothing
 end
