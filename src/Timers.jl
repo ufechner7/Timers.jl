@@ -24,31 +24,31 @@ module Timers
 
 export tic, toc, sleep_ms, wait_until
 
-const start = [time()]
+const start = [time_ns()]
 
 function tic()
-    start[1] = time()
+    start[1] = time_ns()
+    nothing
 end
 
-function toc()
-    time() - start[1]
+function toc(prn=true)
+    elapsed=(time_ns() - start[1])/1e9
+    if prn
+        println("Time elapsed: $elapsed s")
+    end
+    elapsed
 end
 
 @inline function  sleep_ms(time_ms)
-    delta1 = 0.004
-    delta2 = 0.0002
-    finish = time() + time_ms/1000.0
+    # use the sleep() function only for delays greater than 4ms
+    delta1 = 0.004e9
+    finish = time_ns() + time_ms*1e6
     # sleep and allow cooperative multitasking
-    if finish - delta1 > time()
-        sleep(finish - time() - 0.003)
+    if (finish - delta1) > time_ns()
+        sleep(1e-9*(finish - time_ns() - 0.003e9))
     end
-    # finish = time() + time_ms/1000.0
-    # # sleep using the OS sleep functions
-    # if finish-delta2 > 1000.0 * delta2
-    #     Base.Libc.systemsleep(round((finish-delta2)/1000.0 - delta2))
-    # end
     # busy waiting
-    while finish > time()-0.95e-6
+    while finish > time_ns()
     end
 end
 
