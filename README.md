@@ -48,9 +48,11 @@ julia> include("test/bench.jl")
   "2ms" => TrialEstimate(2.000 ms)
 4-element BenchmarkTools.BenchmarkGroup:
   tags: ["sleep"]
+  "20ms" => TrialEstimate(21.267 ms)
   "5ms" => TrialEstimate(6.255 ms)
   "1ms" => TrialEstimate(2.219 ms)
   "10ms" => TrialEstimate(11.215 ms)
   "2ms" => TrialEstimate(3.199 ms)
 ```
-This are the mean values. The error of the sleep_ms function is below 0.1% +- 100ns. The error of the default sleep() function of Julia is between 1ms and 2ms, for the set values of 1ms to 10ms this is an error of 13% to 62%.
+This are the mean values. The error of the sleep_ms function is below 0.1% +- 100ns. The error of the default sleep() function of Julia on Linux is between 1ms and 2ms, for the set values of 1ms to 10ms this is an error of 13% to 62%.
+On Windows the error is between 10ms and 20ms.
