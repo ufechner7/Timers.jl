@@ -45,7 +45,7 @@ end
         delta1 = 0.004e9
     else
         # and delays greater than 16ms on other OS
-        delta1 = 16e9
+        delta1 = 0.016e9
     end
     finish = time_ns() + time_ms*1e6
     # sleep and allow cooperative multitasking
@@ -63,11 +63,12 @@ end
     if always_sleep
         sleep(0.001)
     end
+    # use the sleep() function only for delays greater than 4ms on Linux
     if Sys.islinux()
         delta1 = 0.004e9
     else
         # and delays greater than 16ms on other OS
-        delta1 = 16e9
+        delta1 = 0.016e9
     end
     # sleep and allow cooperative multitasking
     if finish_ns - delta1 > time_ns()
