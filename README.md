@@ -13,7 +13,7 @@ use `toc(false)`.
 Returns the time since the timer was started in seconds.
 
 ```sleep_ms(time_ms)```  
-Sleeps for the given number of milli-seconds. Accuracy on Linux better than 100 nanoseconds +-0.2%, but only if the system is not fully loaded. On Linux for delays larger than 4ms sleep() is used, on Windows for delays larger than 16 ms.
+Sleeps for the given number of milli-seconds. Accuracy on Linux better than 100 nanoseconds +-0.2%, but only if the system is not fully loaded. On Linux for delays larger than 10ms sleep() is used, on Windows for delays larger than 16 ms.
 
 ```wait_until(finish_ns; always_sleep=false)```  
 Sleeps until the given time [ns] is reached. Example:
