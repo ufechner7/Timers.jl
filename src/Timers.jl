@@ -22,18 +22,20 @@ SOFTWARE. =#
 
 module Timers
 
+using Dates
 export tic, toc, sleep_ms, wait_until
 
 const start = [time_ns()]
 
 function tic()
     start[1] = time_ns()
-    nothing
+    println( "$( Dates.hour( now( ) ) ):$( Dates.minute( now( ) ) )" )
 end
 
 function toc(prn=true)
     elapsed=(time_ns() - start[1])/1e9
     if prn
+        println( "$( Dates.hour( now( ) ) ):$( Dates.minute( now( ) ) )" )
         println("Time elapsed: $elapsed s")
     end
     elapsed
