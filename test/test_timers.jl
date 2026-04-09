@@ -6,7 +6,7 @@ end
 using Test
 using Timers
 
-@testset "test_timers" seed=0 begin
+@testset "test_timers" begin
     tic()
     t0 = toc(false)
     @test t0 >= 0.0
