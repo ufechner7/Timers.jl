@@ -6,9 +6,14 @@ The package provides the following functions:
 ```tic()```  
 Starts a timer
 
-```toc(prn=true)```  
+```toc(prn=true; digits=2)```  
 Print the time in seconds since tic() was called. To suppress the printed output
-use `toc(false)`. 
+use `toc(false)`. The optional keyword parameter `digits` controls the number of
+decimal digits printed.
+
+```toc(msg::String; digits=2)```  
+Print the provided message followed by the elapsed time in seconds. The optional
+keyword parameter `digits` controls the number of decimal digits printed.
 
 Returns the time since the timer was started in seconds.
 

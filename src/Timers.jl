@@ -31,11 +31,17 @@ function tic()
     nothing
 end
 
-function toc(prn=true)
+function toc(prn=true; digits=2)
     elapsed=(time_ns() - start[1])/1e9
     if prn
-        println("Time elapsed: $elapsed s")
+        println("Time elapsed: $(round(elapsed, digits=digits)) s")
     end
+    elapsed
+end
+
+function toc(msg::String; digits=2)
+    elapsed=(time_ns() - start[1])/1e9
+    println("$msg $(round(elapsed, digits=digits)) s")
     elapsed
 end
 
