@@ -1,7 +1,8 @@
 using Pkg
-if ! ("BenchmarkTools" ∈ keys(Pkg.project().dependencies))
-    using TestEnv; TestEnv.activate()
+if abspath(PROGRAM_FILE) == abspath(@__FILE__)
+    Pkg.activate(@__DIR__)
 end
+
 using Timers, BenchmarkTools
 
 function test_wait_until(delta_t_ms)

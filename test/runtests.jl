@@ -1,6 +1,11 @@
 using Timers
 using Test
 
-@testset "Timers.jl" begin
-    include("bench.jl")
+cd(dirname(@__DIR__))
+println("Running tests in: ", pwd())
+
+@testset "Timers.jl" seed=0 begin
+    # include("bench.jl")
+    include("test_timers.jl")
 end
+nothing

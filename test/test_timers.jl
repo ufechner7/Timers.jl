@@ -6,7 +6,7 @@ end
 using Test
 using Timers
 
-@testset "workspace" begin
+@testset "test_timers" seed=0 begin
     tic()
     t0 = toc(false)
     @test t0 >= 0.0
@@ -20,3 +20,4 @@ using Timers
     wait_until(finish_ns)
     @test time_ns() >= finish_ns
 end
+nothing
