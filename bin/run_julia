@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# SPDX-FileCopyrightText: 2022 Uwe Fechner
+# SPDX-License-Identifier: MIT
+
+LANG=en_US julia --project -i -e 'using Timers'
