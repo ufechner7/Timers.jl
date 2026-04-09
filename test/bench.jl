@@ -1,6 +1,6 @@
 using Pkg
-if ! ("BenchmarkTools" ∈ keys(Pkg.project().dependencies))
-    using TestEnv; TestEnv.activate()
+if abspath(PROGRAM_FILE) == abspath(@__FILE__)
+    Pkg.activate(@__DIR__)
 end
 using Timers, BenchmarkTools
 
