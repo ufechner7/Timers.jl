@@ -53,10 +53,11 @@ end
         # and delays greater than 16ms on other OS
         delta1 = 0.016e9
     end
-    finish = time_ns() + time_ms*1e6
+    _time_ns = time_ns()
+    finish = _time_ns + time_ms*1e6
     # sleep and allow cooperative multitasking
-    if (finish - delta1) >= time_ns()
-        sleep(1e-9*(finish - time_ns() - delta1))
+    if (finish - delta1) >= _time_ns
+        sleep(1e-9*(finish - _time_ns - delta1))
     end
     # busy waiting
     while finish > time_ns()
